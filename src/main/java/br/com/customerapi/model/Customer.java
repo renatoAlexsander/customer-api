@@ -1,8 +1,6 @@
 package br.com.customerapi.model;
 
 import br.com.customerapi.dto.CustomerRequest;
-import br.com.customerapi.dto.CustomerResponse;
-import br.com.customerapi.util.DateUtil;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,7 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "CUSTOMERS")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -46,14 +44,5 @@ public class Customer {
         var customer = new Customer();
         BeanUtils.copyProperties(request, customer);
         return customer;
-    }
-
-    public static CustomerResponse of(Customer customer) {
-        var customerResponse = new CustomerResponse();
-        BeanUtils.copyProperties(customer, customerResponse);
-
-        customerResponse.setAge(DateUtil.discoveryAge(customer.getBirthDate()));
-
-        return customerResponse;
     }
 }

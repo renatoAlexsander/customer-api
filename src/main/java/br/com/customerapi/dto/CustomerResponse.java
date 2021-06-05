@@ -1,9 +1,11 @@
 package br.com.customerapi.dto;
 
+import br.com.customerapi.model.Customer;
+import br.com.customerapi.util.DateUtil;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -29,4 +31,12 @@ public class CustomerResponse {
 
     private long age;
 
+    public static CustomerResponse of(Customer customer) {
+        var customerResponse = new CustomerResponse();
+        BeanUtils.copyProperties(customer, customerResponse);
+
+        customerResponse.setAge(DateUtil.discoveryAge(customer.getBirthDate()));
+
+        return customerResponse;
+    }
 }

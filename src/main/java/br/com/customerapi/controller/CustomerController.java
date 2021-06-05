@@ -4,6 +4,8 @@ import br.com.customerapi.dto.CustomerRequest;
 import br.com.customerapi.dto.CustomerResponse;
 import br.com.customerapi.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,5 +32,10 @@ public class CustomerController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "body must send id.");
         }
         return customerService.update(request);
+    }
+
+    @GetMapping
+    public Page<CustomerResponse> all(Pageable pageable) {
+        return customerService.all(pageable);
     }
 }

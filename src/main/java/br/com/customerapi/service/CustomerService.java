@@ -6,6 +6,9 @@ import br.com.customerapi.model.Customer;
 import br.com.customerapi.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,7 +21,7 @@ public class CustomerService {
 
     public CustomerResponse save(CustomerRequest request) {
         final var customer = Customer.of(request);
-        return Customer.of(customerRepository.save(customer));
+        return CustomerResponse.of(customerRepository.save(customer));
     }
 
     public CustomerResponse update(CustomerRequest request) {
@@ -26,6 +29,11 @@ public class CustomerService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found."));
 
         BeanUtils.copyProperties(request, customer, "id");
-        return Customer.of(customerRepository.save(customer));
+        return CustomerResponse.of(customerRepository.save(customer));
+    }
+
+    public Page<CustomerResponse> all(Pageable pageable) {
+        final var customers = customerRepository.findAll(pageable);
+        return new PageImpl<>(customers.map(CustomerResponse::of).toList(), pageable, customers.getSize());
     }
 }
