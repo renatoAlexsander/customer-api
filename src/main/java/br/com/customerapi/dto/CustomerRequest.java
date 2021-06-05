@@ -12,6 +12,8 @@ import java.time.LocalDate;
 @Setter
 public class CustomerRequest {
 
+    private Long id;
+
     @NotNull
     @NotEmpty
     private String name;

@@ -3,6 +3,7 @@ package br.com.customerapi.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -21,5 +22,11 @@ public class CustomerResponse {
     @NotNull
     @NotEmpty
     private LocalDateTime registerAt;
+
+    @NotNull
+    @NotEmpty
+    private LocalDateTime updatedAt;
+
+    private long age;
 
 }
