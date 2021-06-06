@@ -20,9 +20,9 @@ public class CustomerRequest {
     @Schema(description = "customer name", example = "RENATO ALEXSANDER", name = "name")
     private String name;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @Schema(description = "customer birth date", example = "04/03/1996", name = "birthDate")
+    @Schema(description = "customer birth date", example = "1996-03-04", name = "birthDate")
     private LocalDate birthDate;
 
     @NotNull
