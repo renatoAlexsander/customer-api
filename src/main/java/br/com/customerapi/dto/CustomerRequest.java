@@ -15,8 +15,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CustomerRequest {
 
-    private Long id;
-
     @NotNull
     @NotEmpty
     @Schema(description = "customer name", example = "RENATO ALEXSANDER", name = "name")

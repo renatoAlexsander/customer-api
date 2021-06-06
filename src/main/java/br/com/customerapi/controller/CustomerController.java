@@ -12,10 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -34,16 +32,13 @@ public class CustomerController {
         return customerService.save(request);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Operation(summary = "update existing customer")
     @ApiResponse(responseCode = "201", description = "customer update")
     @ApiResponse(responseCode = "400", description = "body without id.")
     @ApiResponse(responseCode = "404", description = "customer not found by id.")
-    public CustomerResponse update(@Valid @RequestBody CustomerRequest request) {
-        if (Objects.isNull(request.getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "body must send id.");
-        }
-        return customerService.update(request);
+    public CustomerResponse update(@PathVariable Long id, @Valid @RequestBody CustomerRequest request) {
+        return customerService.update(id, request);
     }
 
     @GetMapping

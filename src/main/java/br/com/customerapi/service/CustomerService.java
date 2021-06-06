@@ -25,11 +25,11 @@ public class CustomerService {
         return CustomerResponse.of(customerRepository.save(customer));
     }
 
-    public CustomerResponse update(CustomerRequest request) {
-        var customer = customerRepository.findById(request.getId())
+    public CustomerResponse update(Long id, CustomerRequest request) {
+        var customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found."));
 
-        BeanUtils.copyProperties(request, customer, "id");
+        BeanUtils.copyProperties(request, customer);
         return CustomerResponse.of(customerRepository.save(customer));
     }
 

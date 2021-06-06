@@ -16,14 +16,14 @@ class CustomerResponseTest {
     void of() {
         final var result = CustomerResponse.of(customerModel());
 
+        assertEquals(1L, result.getId());
         assertEquals("RENATO", result.getName());
-        assertEquals(LocalDateTime.of(2021, 1, 1, 8, 0, 0), result.getRegisterAt());
-        assertEquals(LocalDateTime.of(2021, 1, 5, 9, 30, 0), result.getUpdatedAt());
         assertEquals(25, result.getAge());
     }
 
     private Customer customerModel() {
         return Customer.builder()
+                .id(1L)
                 .birthDate(LocalDate.of(1996, 3, 4))
                 .name("RENATO")
                 .document("33322211177")
