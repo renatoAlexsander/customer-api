@@ -3,6 +3,7 @@ package br.com.customerapi.service;
 import br.com.customerapi.dto.CustomerRequest;
 import br.com.customerapi.dto.CustomerResponse;
 import br.com.customerapi.model.Customer;
+import br.com.customerapi.predicate.CustomerFilters;
 import br.com.customerapi.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -32,8 +33,10 @@ public class CustomerService {
         return CustomerResponse.of(customerRepository.save(customer));
     }
 
-    public Page<CustomerResponse> all(Pageable pageable) {
-        final var customers = customerRepository.findAll(pageable);
+    public Page<CustomerResponse> all(CustomerFilters filters, Pageable pageable) {
+        final var predicate = filters.toPredicate();
+        final var customers = customerRepository.findAll(predicate, pageable);
+
         return new PageImpl<>(customers.map(CustomerResponse::of).toList(), pageable, customers.getSize());
     }
 }

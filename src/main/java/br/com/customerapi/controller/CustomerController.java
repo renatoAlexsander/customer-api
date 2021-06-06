@@ -2,6 +2,7 @@ package br.com.customerapi.controller;
 
 import br.com.customerapi.dto.CustomerRequest;
 import br.com.customerapi.dto.CustomerResponse;
+import br.com.customerapi.predicate.CustomerFilters;
 import br.com.customerapi.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,7 +36,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public Page<CustomerResponse> all(Pageable pageable) {
-        return customerService.all(pageable);
+    public Page<CustomerResponse> all(CustomerFilters filters, Pageable pageable) {
+        return customerService.all(filters, pageable);
     }
 }
