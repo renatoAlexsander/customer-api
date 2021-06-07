@@ -6,10 +6,10 @@ spring:
       dialect: org.hibernate.dialect.PostgreSQLDialect
 
     hibernate:
-      ddl-auto: create
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/customerdb
+    url: ${SPRING_DATASOURCE_URL}
     driverClassName: org.postgresql.Driver
-    username: postgres
-    password: postgres
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
