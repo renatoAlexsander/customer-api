@@ -1,23 +1,13 @@
-#spring:
-#  jpa:
-#    database-platform: org.hibernate.dialect.H2Dialect
-#  datasource:
-#    url: jdbc:h2:mem:customersdb
-#  driverClassName: org.h2.Driver
-#  username: sa
-#  password:
-#
-#  h2:
-#    console:
-#      enabled: true
-
 spring:
   jpa:
+    generate-ddl: true
+    show-sql: true
+    properties:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+
     hibernate:
-      show-sql: ture
-      ddl-auto: none
-      properties:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: create
+
   datasource:
     url: jdbc:postgresql://localhost:5432/customerdb
     driverClassName: org.postgresql.Driver
